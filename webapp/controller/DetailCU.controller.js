@@ -26,7 +26,55 @@ sap.ui.define([
 			this.itemno = 100;
 			this.tableDataModel  = this.getOwnerComponent().getModel("tableData");
 			this.masterDataModel = this.getOwnerComponent().getModel("masterData");
-			this.boundleTable    = this.getView().byId("Table01");			
+			this.boundleTable    = this.getView().byId("Table01");	
+			var testData = {
+				bundle : [
+					{
+						name: 'bundle1',
+					},
+					{
+						name: 'bundle2'
+					}
+				],
+				group : {
+					'bundle1': [{
+						name: 'group11',
+					}, {
+						name: 'group12'
+					}],
+					'bundle2': [{
+						name: 'group21',
+					}, {
+						name: 'group22'
+					},{
+						name: 'group23'
+					}],
+				},
+				product : {
+					'group11': [{
+						name: 'product111'
+					},{
+						name: 'product112'
+					},{
+						name: 'product113'
+					},{
+						name: 'product114'
+					}],
+					'group12': [{
+						name: 'product121'
+					},{
+						name: 'product122'
+					}],
+					'group21': [{
+						name: 'product211'
+					},{
+						name: 'product212'
+					},{
+						name: 'product213'
+					}],
+				}
+			};
+			this.testModel = this.getView().setModel(new JSONModel(testData),'test');
 			
 		},
 		onAfterRendering: function() {},
@@ -656,7 +704,27 @@ sap.ui.define([
 				this.getModel("appView").setProperty("/submitBut", true);
 				this.getModel("appView").setProperty("/calculateBut", false);
 			}
-		}
-
+		},
+		_unSelect(oControl) {
+			oControl.setSelectedItem(null);
+		},
+		onChangeBundle:  function(oEvent) {
+			var oRow = oEvent.getSource().getParent();
+			var oSelectGroup = oRow.getCells()[3];
+			var groupItems = oSelectGroup.getBinding("items");
+			groupItems.sPath = "/group/" + oEvent.getSource().getSelectedKey();
+			groupItems.refresh();
+			this._unSelect(oSelectGroup);
+			var oSelectProduct = oRow.getCells()[4];
+			this._unSelect(oSelectProduct);
+		},
+		onChangeGroup:  function(oEvent) {
+			var oRow = oEvent.getSource().getParent();
+			var oSelectProduct = oRow.getCells()[4];
+			var productItems = oSelectProduct.getBinding("items");
+			productItems.sPath = "/product/" + oEvent.getSource().getSelectedKey();
+			productItems.refresh();
+			this._unSelect(oSelectProduct);
+		},
 	});
 });

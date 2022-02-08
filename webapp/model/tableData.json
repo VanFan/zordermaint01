@@ -13,9 +13,11 @@
 	}, {
 		"name": "父行号"
 	}, {
-		"name": "类型"
+		"name": "Bundle"
 	}, {
-		"name": "物料"
+		"name": "Group"
+	}, {
+		"name": "Product"
 	}, {
 		"name": "数量"
 	}, {

@@ -373,22 +373,45 @@
                                             <Input value="{tableData>boundno}"
                                                 editable="{tableData>edit}" />
                                             <!--<m:Text text="{tableData>typename}"/>-->
-                                            <Select items="{masterData>/typenames}"
+                                            <!-- <Select items="{masterData>/typenames}"
                                                 selectedKey="{tableData>typename}"
                                                 forceSelection="false"
                                                 change="onChange1"
                                                 editable="{tableData>edit}">
                                                 <core:Item key="{masterData>name}"
                                                     text="{masterData>name}" />
-                                            </Select>
+                                            </Select> -->
                                             <!--<m:Text text="{tableData>name}"/>-->
-                                            <Select items="{masterData>/type}"
+                                            <!-- <Select items="{masterData>/type}"
                                                 selectedKey="{tableData>name}"
                                                 forceSelection="false"
                                                 change="onChange2"
                                                 editable="{tableData>edit}">
                                                 <core:Item key="{masterData>name}"
                                                     text="{masterData>name}" />
+                                            </Select> -->
+                                            <Select items="{test>/bundle}"
+                                                selectedKey="{tableData>bundle}"
+                                                forceSelection="false"
+                                                change="onChangeBundle"
+                                                editable="{tableData>edit}">
+                                                <core:Item key="{test>name}"
+                                                    text="{test>name}" />
+                                            </Select>
+                                            <Select items="{test>/group}"
+                                                selectedKey="{tableData>group}"
+                                                forceSelection="false"
+                                                change="onChangeGroup"
+                                                editable="{tableData>edit}">
+                                                <core:Item key="{test>name}"
+                                                    text="{test>name}" />
+                                            </Select>
+                                            <Select items="{test>/product}"
+                                                selectedKey="{tableData>product}"
+                                                forceSelection="false"
+                                                editable="{tableData>edit}">
+                                                <core:Item key="{test>name}"
+                                                    text="{test>name}" />
                                             </Select>
                                             <Input value="{path:'tableData>quantity',type:'sap.ui.model.type.Integer'}" />
                                             <Button text="copy"
