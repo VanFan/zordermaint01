@@ -1,0 +1,127 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout">
+    <!--stretch="{jQuery.device.is.phone}"-->
+    <Dialog stretch="true"
+        busy="{appView>/busy}"
+        showHeader="true">
+        <content>
+            <Vbox width="500px"
+                id="mesQualific"
+                visible="{=${LICENCE} ? true : false }">
+                <MessageStrip text="{LICENCE}"
+                    type="Success" />
+            </Vbox>
+            <f:SimpleForm layout="ColumnLayout"
+                columnsL="1"
+                labelSpanL="12"
+                labelSpanM="12">
+                <f:content>
+                    <Label text="{/#Header/SOLDTO_ID/@sap:label}"
+                        width="auto" />
+                    <smf:SmartField xmlns:smf="sap.ui.comp.smartfield"
+                        value="{HeaderSet>SOLDTO_ID}"
+                        editable="true"
+                        change="onPartnerChange"
+                        width="200px" />
+                    <Label text="{/#Header/PROCESS_TYPE/@sap:label}"
+                        width="auto" />
+                    <smf:SmartField xmlns:smf="sap.ui.comp.smartfield"
+                        value="{HeaderSet>PROCESS_TYPE}"
+                        editable="true"
+                        change="onProcessTypeChange"
+                        width="200px">
+                        <smf:configuration>
+                            <smf:Configuration controlType="dropDownList"
+                                displayBehaviour="idAndDescription" />
+                        </smf:configuration>
+                    </smf:SmartField>
+                </f:content>
+            </f:SimpleForm>
+            <!--visible="{appView>/tabvisible}"-->
+            <VBox width="500px">
+                <IconTabBar expanded="true"
+                    id="tabBar1"
+                    applyContentPadding="false"
+                    busyIndicatorSize="Small"
+                    backgroundDesign="Translucent">
+                    <layoutData>
+                        <l:GridData span="XL12 L12 M12 S12" />
+                    </layoutData>
+                    <items>
+                        <IconTabFilter text="协议"
+                            id="tab1"
+                            key="tab1">
+                            <Table id="agreeTable"
+                                noDataText="No Date"
+                                mode="SingleSelectLeft"
+                                items="{/AgconSet}"
+                                growingThreshold="10"
+                                growing="true">
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Text text="{AGCON}" />
+                                            <Text text="{AUTH_DES}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                                <columns>
+                                    <Column width="100px">
+                                        <Label text="{/#Agcon/AGCON/@sap:label}" />
+                                    </Column>
+                                    <Column width="200px">
+                                        <Label text="{/#Agcon/AUTH_DES/@sap:label}" />
+                                    </Column>
+                                </columns>
+                            </Table>
+                        </IconTabFilter>
+                        <IconTabFilter text="合同"
+                            id="tab2"
+                            key="tab2">
+                            <Table id="contractTable"
+                                noDataText="No Date"
+                                mode="SingleSelectLeft"
+                                items="{/ContractSet}"
+                                growingThreshold="10"
+                                growing="true">
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Text text="{AGCON}" />
+                                            <Text text="{AUTH_DES}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                                <columns>
+                                    <Column width="100px">
+                                        <header>
+                                            <Label text="{/#Contract/AGCON/@sap:label}" />
+                                        </header>
+                                    </Column>
+                                    <Column width="200px">
+                                        <header>
+                                            <Label text="{/#Contract/AUTH_DES/@sap:label}" />
+                                        </header>
+                                    </Column>
+                                </columns>
+                            </Table>
+                        </IconTabFilter>
+                    </items>
+                </IconTabBar>
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="{i18n>ok}"
+                width="100px"
+                press="onDialogOk"
+                visible="{=${appView>/qualificFlag} &amp;&amp; ${appView>/tabvisible} }" />
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>close}"
+                width="100px"
+                press="onDialogClose" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

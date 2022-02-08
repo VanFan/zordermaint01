@@ -1,0 +1,56 @@
+<mvc:View xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:smartVariantManagement="sap.ui.comp.smartvariants"
+    xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    id="productListView"
+    controllerName="zychcn.zorder_maint01.controller.productList">
+    <Page>
+        <content>
+            <HBox class="exPageVariantPadding">
+                <smartVariantManagement:SmartVariantManagement visible="false"
+                    id="pageVariantId"
+                    persistencyKey="PageVariantPKey" />
+            </HBox>
+            <smartFilterBar:SmartFilterBar smartVariant="pageVariantId"
+                search="onSearch"
+                id="smartFilterBar"
+                entitySet="ProductSet"
+                persistencyKey="SmartFilter_Explored">
+                <!-- layout data used to make the table growing but the filter bar fixed -->
+                <smartFilterBar:filterItems />
+                <smartFilterBar:layoutData>
+                    <FlexItemData shrinkFactor="0" />
+                </smartFilterBar:layoutData>
+            </smartFilterBar:SmartFilterBar>
+            <!--tableType="ResponsiveTable"-->
+            <smartTable:SmartTable id="productListTable"
+                tableType="Table"
+                smartFilterId="smartFilterBar"
+                useVariantManagement="false"
+                useTablePersonalisation="true"
+                showRowCount="false"
+                class="sapUiResponsiveContentPadding"
+                entitySet="ProductSet"
+                showTablePersonalisation="false"
+                demandPopin="true"
+                enableAutoBinding="true">
+                <Table growing="true"
+                    mode="MultiSelect" />
+            </smartTable:SmartTable>
+        </content>
+        <footer>
+            <Bar id="__bar0">
+                <contentRight>
+                    <Button text="{i18n>add}"
+                        width="100px"
+                        id="__button1"
+                        type="Emphasized"
+                        press="onAdd" />
+                </contentRight>
+            </Bar>
+        </footer>
+    </Page>
+</mvc:View>

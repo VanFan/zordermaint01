@@ -1,0 +1,83 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:f="sap.f"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:smartVariantManagement="sap.ui.comp.smartvariants"
+	xmlns:smartFilterBar="sap.ui.comp.smartfilterbar"
+	xmlns:smartTable="sap.ui.comp.smarttable"
+	controllerName="zychcn.zorder_maint01.controller.Master">
+	<f:DynamicPage id="dynamicMasterPage">
+		<!--DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="{i18n>title}" />
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<f:header>
+			<f:DynamicPageHeader>
+				<f:content>
+					<HBox class="exPageVariantPadding">
+						<smartVariantManagement:SmartVariantManagement id="pageVariantId"
+							persistencyKey="PageVariantPKey" />
+					</HBox>
+					<smartFilterBar:SmartFilterBar id="smartFilterBar"
+						smartVariant="pageVariantId"
+						entitySet="HeaderSet"
+						persistencyKey="SmartFilter_Explored"></smartFilterBar:SmartFilterBar>
+				</f:content>
+			</f:DynamicPageHeader>
+		</f:header>
+		<!--DynamicPage Content -->
+		<f:content>
+			<smartTable:SmartTable tableType="ResponsiveTable"
+				smartFilterId="smartFilterBar"
+				smartVariant="pageVariantId"
+				persistencyKey="SmartTablePKey"
+				useExportToExcel="true"
+				beforeExport="onBeforeExport"
+				useVariantManagement="false"
+				useTablePersonalisation="false"
+				header="Order"
+				showRowCount="false"
+				class="sapUiResponsiveContentPadding"
+				entitySet="HeaderSet"
+				showTablePersonalisation="false"
+				demandPopin="true"
+				enableAutoBinding="true">
+				<Table growing="true">
+					<ColumnListItem type="Navigation"
+						press=".onSelectionChange">
+						<cells>
+							<Text text="{PROCESS_TYPE}" />
+							<Text text="{PROCESS_TYPE_DES}" />
+							<Text text="{OBJECT_ID}" />
+							<Text text="{SOLDTO_ID}" />
+							<Text text="{GROSS_VALUE}" />
+							<Text text="{STATUS_DES}" />
+							<Text text="{DELIVERED_DES}" />
+							<Text text="{CREDIT_NOT_OK_DES}" />
+							<Text text="{path: 'CRDATE', type: 'sap.ui.model.type.DateTime', formatOptions: { pattern: 'YYYY-MM-dd' } }" />
+						</cells>
+					</ColumnListItem>
+				</Table>
+				<smartTable:customToolbar>
+					<OverflowToolbar width="100%"
+						id="__toolbar2">
+						<content>
+							<ToolbarSpacer id="__spacer2" />
+							<Button text="{i18n>create}"
+								width="100px"
+								id="__button0"
+								type="Transparent"
+								press=".onCreatePress" />
+						</content>
+					</OverflowToolbar>
+				</smartTable:customToolbar>
+			</smartTable:SmartTable>
+		</f:content>
+		<!--DynamicPage Footer-->
+		<f:footer></f:footer>
+	</f:DynamicPage>
+</mvc:View>

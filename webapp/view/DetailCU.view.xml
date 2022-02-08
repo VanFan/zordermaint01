@@ -1,0 +1,438 @@
+<mvc:View xmlns="sap.uxap"
+    xmlns:m="sap.m"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    controllerName="zychcn.zorder_maint01.controller.DetailCU"
+    displayBlock="true"
+    busy="{appView>/busy}">
+    <ObjectPageLayout id="ObjectPageLayout"
+        preserveHeaderStateOnScroll="false"
+        headerContentPinnable="true"
+        upperCaseAnchorBar="false"
+        showFooter="true">
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+                <navigationActions>
+                    <m:OverflowToolbarButton type="Transparent"
+                        icon="sap-icon://decline"
+                        press=".onCloseDetail"
+                        tooltip="Close column"
+                        visible="true" />
+                </navigationActions>
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+        <headerContent>
+            <FlexBox xmlns="sap.m"
+                wrap="Wrap"
+                fitContainer="true"
+                alignItems="Stretch">
+                <f:Avatar displaySize="L"
+                    displayShape="Square"
+                    class="sapUiTinyMarginEnd" />
+                <VBox justifyContent="Center"
+                    class="sapUiSmallMarginEnd">
+                    <Label text="{PROCESS_TYPE_D} {PROCESS_TYPE_DES}" />
+                    <Label text="{i18n>OrderId}:{OBJECT_ID}" />
+                </VBox>
+            </FlexBox>
+        </headerContent>
+        <sections>
+            <ObjectPageSection title="{i18n>GeneralInfo}">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm maxContainerCols="2"
+                                layout="ColumnLayout"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                labelSpanL="2"
+                                labelSpanM="2">
+                                <form:content>
+                                    <m:Label text="{/#Header/PROCESS_TYPE/@sap:label}"
+                                        visible="{fldModel>/HEADER/PROCESS_TYPE/VISIBLE}" />
+                                    <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                        id="fldProcessType"
+                                        value="{PROCESS_TYPE_D}"
+                                        visible="{fldModel>/HEADER/PROCESS_TYPE/VISIBLE}"
+                                        editable="{fldModel>/HEADER/PROCESS_TYPE/EDIT}"
+                                        mandatory="{fldModel>/HEADER/PROCESS_TYPE/REQUIRED}">
+                                        <smartfield:configuration>
+                                            <smartfield:Configuration controlType="dropDownList"
+                                                displayBehaviour="idAndDescription" />
+                                        </smartfield:configuration>
+                                    </smartfield:SmartField>
+                                    <m:Label text="{/#Header/OBJECT_ID/@sap:label}"
+                                        visible="{fldModel>/HEADER/OBJECT_ID/VISIBLE}" />
+                                    <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                        value="{OBJECT_ID}"
+                                        visible="{fldModel>/HEADER/OBJECT_ID/VISIBLE}"
+                                        editable="{fldModel>/HEADER/OBJECT_ID/EDIT}"
+                                        mandatory="{fldModel>/HEADER/OBJECT_ID/REQUIRED}" />
+                                    <m:Label text="{/#Header/YOUR_REF_SOLD/@sap:label}/{/#Header/CONTRACT_ID/@sap:label}" />
+                                    <m:Text text="{YOUR_REF_SOLD}{CONTRACT_ID}" />
+                                    <m:Label text="{/#Header/CODE/@sap:label}"
+                                        visible="{fldModel>/HEADER/CODE/VISIBLE}" />
+                                    <!--autoAdjustWidth="true" -->
+                                    <m:Select id="fldCodList"
+                                        selectedKey="{CODE}"
+                                        icon="sap-icon://filter"
+                                        width="50%"
+                                        items="{ path: '/OrderReasonSet' }"
+                                        visible="{fldModel>/HEADER/CODE/VISIBLE}"
+                                        editable="{fldModel>/HEADER/CODE/EDIT}"
+                                        forceSelection="{fldModel>/HEADER/CODE/REQUIRED}">
+                                        <core:Item key="{KEY}"
+                                            text="{KEY} {VALUE}" />
+                                    </m:Select>
+                                    <m:Label text="{/#Header/STATUS/@sap:label}"
+                                        visible="{fldModel>/HEADER/STATUS/VISIBLE}" />
+                                    <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                        value="{STATUS}"
+                                        visible="{fldModel>/HEADER/STATUS/VISIBLE}"
+                                        editable="{fldModel>/HEADER/STATUS/EDIT}">
+                                        <smartfield:configuration>
+                                            <smartfield:Configuration controlType="dropDownList"
+                                                displayBehaviour="idAndDescription" />
+                                        </smartfield:configuration>
+                                    </smartfield:SmartField>
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+            <ObjectPageSection title="{i18n>partnerInfo}">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm maxContainerCols="2"
+                                layout="ColumnLayout"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                labelSpanL="2"
+                                labelSpanM="1">
+                                <form:content>
+                                    <m:Label text="{/#Header/SOLDTO_ID/@sap:label}"
+                                        visible="{fldModel>/HEADER/SOLDTO_ID/VISIBLE}" />
+                                    <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                        value="{SOLDTO_ID}"
+                                        visible="{fldModel>/HEADER/SOLDTO_ID/VISIBLE}"
+                                        editable="{fldModel>/HEADER/SOLDTO_ID/EDIT}"
+                                        mandatory="{fldModel>/HEADER/SOLDTO_ID/REQUIRED}" />
+                                    <!--<m:Label text="{/#Header/SOLDTO_NAME/@sap:label}"/>-->
+                                    <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                        value="{SOLDTO_NAME}"
+                                        visible="{fldModel>/HEADER/SOLDTO_NAME/VISIBLE}"
+                                        editable="{fldModel>/HEADER/SOLDTO_NAME/EDIT}"
+                                        mandatory="{fldModel>/HEADER/SOLDTO_NAME/REQUIRED}" />
+                                    <m:Label text="{/#Header/ADDRNUMBER/@sap:label}"
+                                        visible="{fldModel>/HEADER/ADDRNUMBER/VISIBLE}" />
+                                    <!--autoAdjustWidth="true"  -->
+                                    <m:Select id="fldAddr"
+                                        selectedKey="{ADDRNUMBER}"
+                                        icon="sap-icon://filter"
+                                        width="50%"
+                                        items="{ path: '/ShipToAddrSet' }"
+                                        visible="{fldModel>/HEADER/ADDRNUMBER/VISIBLE}"
+                                        editable="{fldModel>/HEADER/ADDRNUMBER/EDIT}"
+                                        forceSelection="{fldModel>/HEADER/ADDRNUMBER/REQUIRED}">
+                                        <core:Item key="{ADDRNUMBER}"
+                                            text="{ADDRNUMBER} {ADDRESS_SHORT}" />
+                                    </m:Select>
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                        <actions />
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+            <ObjectPageSection title="{i18n>priceInfo}">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm maxContainerCols="2"
+                                layout="ColumnLayout"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                labelSpanL="2"
+                                labelSpanM="1">
+                                <form:content>
+                                    <m:Label text="{/#Header/NET_VALUE/@sap:label}"
+                                        visible="{fldModel>/HEADER/NET_VALUE/VISIBLE}" />
+                                    <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                        value="{NET_VALUE}"
+                                        visible="{fldModel>/HEADER/NET_VALUE/VISIBLE}"
+                                        editable="{fldModel>/HEADER/NET_VALUE/EDIT}"
+                                        mandatory="{fldModel>/HEADER/NET_VALUE/REQUIRED}" />
+                                    <m:Label text="{/#Header/TAX_AMOUNT/@sap:label}"
+                                        visible="{fldModel>/HEADER/TAX_AMOUNT/VISIBLE}" />
+                                    <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                        value="{TAX_AMOUNT}"
+                                        visible="{fldModel>/HEADER/TAX_AMOUNT/VISIBLE}"
+                                        editable="{fldModel>/HEADER/TAX_AMOUNT/EDIT}"
+                                        mandatory="{fldModel>/HEADER/TAX_AMOUNT/REQUIRED}" />
+                                    <m:Label text="{/#Header/GROSS_VALUE/@sap:label}"
+                                        visible="{fldModel>/HEADER/TAX_AMOUNT/VISIBLE}" />
+                                    <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                        value="{GROSS_VALUE}"
+                                        visible="{fldModel>/HEADER/TAX_AMOUNT/VISIBLE}"
+                                        editable="{fldModel>/HEADER/TAX_AMOUNT/EDIT}"
+                                        mandatory="{fldModel>/HEADER/TAX_AMOUNT/REQUIRED}" />
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+            <ObjectPageSection title="{i18n>notesInfo}">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <form:SimpleForm maxContainerCols="1"
+                                layout="ResponsiveGridLayout"
+                                emptySpanL="0"
+                                emptySpanM="0"
+                                labelSpanL="2"
+                                labelSpanM="1">
+                                <form:content>
+                                    <m:Label text="{/#Header/NOTES_ZCOS/@sap:label}"
+                                        visible="{fldModel>/HEADER/NOTES_ZCOS/VISIBLE}" />
+                                    <m:TextArea width="400px"
+                                        height="200px"
+                                        value="{NOTES_ZCOS}"
+                                        growing="true"
+                                        visible="{fldModel>/HEADER/NOTES_ZCOS/VISIBLE}"
+                                        editable="{fldModel>/HEADER/NOTES_ZCOS/EDIT}"
+                                        required="{fldModel>/HEADER/NOTES_ZCOS/REQUIRED}" />
+                                </form:content>
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+            <ObjectPageSection title="{i18n>Item}">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <Table xmlns="sap.m"
+                                id="__table1"
+                                delete="deleteRow"
+                                backgroundDesign="Solid"
+                                items="{ItemSet}"
+                                mode="{= ${READONLY} === 'X' ? null : 'Delete' }"
+                                growing="true"
+                                growingThreshold="10000"
+                                paste="onPaste">
+                                <headerToolbar>
+                                    <Toolbar id="__toolbar3">
+                                        <Title width="100%"
+                                            text="{i18n>productInfo}" />
+                                        <ToolbarSpacer />
+                                        <Button type="Emphasized"
+                                            press="onProductList"
+                                            visible="{=${READONLY} !== 'X'}"
+                                            text="{i18n>productList}" />
+                                        <Button icon="sap-icon://paste"
+                                            type="Emphasized"
+                                            press="firePaste"
+                                            visible="{=${READONLY} !== 'X'}"
+                                            text="{i18n>paste}" />
+                                        <Button icon="sap-icon://add"
+                                            type="Emphasized"
+                                            press="onAdd"
+                                            visible="{=${READONLY} !== 'X'}" />
+                                        <content />
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column width="10%"
+                                        styleClass="cellBorderRight"
+                                        demandPopin="true"
+                                        visible="{fldModel>/ITEM/NUMBER_INT/VISIBLE}">
+                                        <Label text="{/#Item/NUMBER_INT/@sap:label}" />
+                                    </Column>
+                                    <Column width="30%"
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                        visible="{fldModel>/ITEM/SHORT_TEXT/VISIBLE}">
+                                        <Label text="{/#Item/SHORT_TEXT/@sap:label}" />
+                                    </Column>
+                                    <Column width="15%"
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                        visible="{fldModel>/ITEM/PRODUCT_ID/VISIBLE}">
+                                        <Label text="{/#Item/PRODUCT_ID/@sap:label}" />
+                                    </Column>
+                                    <Column width="10%"
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                        visible="{fldModel>/ITEM/QUANTITY/VISIBLE}">
+                                        <Label text="{/#Item/QUANTITY/@sap:label} ({/#Item/UNIT/@sap:label})" />
+                                    </Column>
+                                    <Column width="10%"
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                        visible="{fldModel>/ITEM/NUMBER_PARENT/VISIBLE}">
+                                        <Label text="{/#Item/NUMBER_PARENT/@sap:label}" />
+                                    </Column>
+                                    <Column width="10%"
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                        visible="{fldModel>/ITEM/KBETR/VISIBLE}">
+                                        <Label text="{/#Item/KBETR/@sap:label}" />
+                                    </Column>
+                                    <!--<Column minScreenWidth="Tablet" demandPopin="true">-->
+                                    <!--	<Label text="{/#Item/NET_PRICE/@sap:label}"/>-->
+                                    <!--</Column>-->
+                                    <Column width="10%"
+                                        minScreenWidth="Tablet"
+                                        demandPopin="true"
+                                        visible="{fldModel>/ITEM/GROSS_VALUE/VISIBLE}">
+                                        <Label text="{/#Item/GROSS_VALUE/@sap:label}" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                                value="{NUMBER_INT}"
+                                                visible="{fldModel>/ITEM/NUMBER_INT/VISIBLE}"
+                                                editable="{fldModel>/ITEM/NUMBER_INT/EDIT}"
+                                                mandatory="{fldModel>/ITEM/NUMBER_INT/REQUIRED}" />
+                                            <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                                value="{SHORT_TEXT}"
+                                                visible="{fldModel>/ITEM/SHORT_TEXT/VISIBLE}"
+                                                editable="{fldModel>/ITEM/SHORT_TEXT/EDIT}"
+                                                mandatory="{fldModel>/ITEM/SHORT_TEXT/REQUIRED}" />
+                                            <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                                value="{PRODUCT_ID}"
+                                                visible="{fldModel>/ITEM/PRODUCT_ID/VISIBLE}"
+                                                editable="{fldModel>/ITEM/PRODUCT_ID/EDIT}"
+                                                mandatory="{fldModel>/ITEM/PRODUCT_ID/REQUIRED}" />
+                                            <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                                value="{path:'QUANTITY',type:'sap.ui.model.type.Integer'}"
+                                                visible="{fldModel>/ITEM/QUANTITY/VISIBLE}"
+                                                editable="{fldModel>/ITEM/QUANTITY/EDIT}"
+                                                mandatory="{fldModel>/ITEM/QUANTITY/REQUIRED}" />
+                                            <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                                value="{NUMBER_PARENT}"
+                                                visible="{fldModel>/ITEM/NUMBER_PARENT/VISIBLE}"
+                                                editable="{fldModel>/ITEM/NUMBER_PARENT/EDIT}"
+                                                mandatory="{fldModel>/ITEM/NUMBER_PARENT/REQUIRED}" />
+                                            <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                                value="{KBETR}"
+                                                visible="{fldModel>/ITEM/KBETR/VISIBLE}"
+                                                editable="{fldModel>/ITEM/KBETR/EDIT}"
+                                                mandatory="{fldModel>/ITEM/KBETR/REQUIRED}" />
+                                            <smartfield:SmartField xmlns:smartfield="sap.ui.comp.smartfield"
+                                                value="{GROSS_VALUE}"
+                                                visible="{fldModel>/ITEM/GROSS_VALUE/VISIBLE}"
+                                                editable="{fldModel>/ITEM/GROSS_VALUE/EDIT}"
+                                                mandatory="{fldModel>/ITEM/GROSS_VALUE/REQUIRED}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </blocks>
+                        <actions />
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+            <ObjectPageSection title="{i18n>BoundleItem}">
+                <subSections>
+                    <ObjectPageSubSection>
+                        <blocks>
+                            <Table xmlns="sap.m"
+                                columns="{path: 'tableData>/cols'}"
+                                items="{path:'tableData>/items'}"
+                                id="Table01"
+                                mode="Delete"
+                                delete="onDelBoundle">
+                                <headerToolbar>
+                                    <Toolbar>
+                                        <ToolbarSpacer />
+                                        <Button icon="sap-icon://add"
+                                            type="Emphasized"
+                                            press="onAddBoundle" />
+                                        <content />
+                                    </Toolbar>
+                                </headerToolbar>
+                                <columns>
+                                    <Column width="auto"
+                                        demandPopin="true">
+                                        <Label text="{tableData>name}" />
+                                    </Column>
+                                </columns>
+                                <items>
+                                    <ColumnListItem>
+                                        <cells>
+                                            <Text text="{tableData>itemno}" />
+                                            <Input value="{tableData>boundno}"
+                                                editable="{tableData>edit}" />
+                                            <!--<m:Text text="{tableData>typename}"/>-->
+                                            <Select items="{masterData>/typenames}"
+                                                selectedKey="{tableData>typename}"
+                                                forceSelection="false"
+                                                change="onChange1"
+                                                editable="{tableData>edit}">
+                                                <core:Item key="{masterData>name}"
+                                                    text="{masterData>name}" />
+                                            </Select>
+                                            <!--<m:Text text="{tableData>name}"/>-->
+                                            <Select items="{masterData>/type}"
+                                                selectedKey="{tableData>name}"
+                                                forceSelection="false"
+                                                change="onChange2"
+                                                editable="{tableData>edit}">
+                                                <core:Item key="{masterData>name}"
+                                                    text="{masterData>name}" />
+                                            </Select>
+                                            <Input value="{path:'tableData>quantity',type:'sap.ui.model.type.Integer'}" />
+                                            <Button text="copy"
+                                                press="onCopyBoundle"></Button>
+                                        </cells>
+                                    </ColumnListItem>
+                                </items>
+                            </Table>
+                        </blocks>
+                        <actions />
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+        <footer>
+            <m:Bar id="__bar0">
+                <m:contentLeft>
+                    <m:Button icon="sap-icon://alert"
+                        text="{= ${message>/}.length }"
+                        visible="{= ${message>/}.length &gt; 0 }"
+                        type="Emphasized"
+                        press="onMessagePopoverPress" />
+                </m:contentLeft>
+                <m:contentRight>
+                    <m:Button text="{i18n>calculate}"
+                        width="auto"
+                        press="onCacl"
+                        icon="sap-icon://simulate"
+                        type="Emphasized"
+                        visible="{=${READONLY} !== 'X'}" />
+                    <m:Button text="{i18n>save}"
+                        width="100px"
+                        press="onSave"
+                        icon="sap-icon://save"
+                        type="Emphasized"
+                        visible="{appView>/saveBut}" />
+                    <m:Button text="{i18n>submit}"
+                        width="100px"
+                        press="onSubmit"
+                        icon="sap-icon://save"
+                        type="Emphasized"
+                        visible="{appView>/submitBut}" />
+                </m:contentRight>
+            </m:Bar>
+        </footer>
+    </ObjectPageLayout>
+</mvc:View>

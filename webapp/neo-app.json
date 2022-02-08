@@ -1,0 +1,82 @@
+{
+  "welcomeFile": "index.html",
+  "routes": [
+    {
+      "path": "/webidedispatcher/",
+      "target": {
+        "type": "application",
+        "name": "flpsandbox",
+        "preferLocal": true
+      },
+      "description": "Subscribed Fiori LaunchPad"
+    },
+    {
+      "path": "/resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/resources",
+        "version": "1.71.24"
+      },
+      "description": "SAPUI5 Resources"
+    },
+    {
+      "path": "/test-resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/test-resources",
+        "version": "1.71.24"
+      },
+      "description": "SAPUI5 Test Resources"
+    },
+    {
+      "path": "/test-resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/test-resources",
+        "version": "1.71.24"
+      },
+      "description": "SAPUI5 Test Resources"
+    },
+    {
+      "path": "/resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/resources",
+        "version": "1.71.24"
+      },
+      "description": "SAPUI5 Resources"
+    },
+    {
+      "path": "/sap/opu/odata",
+      "target": {
+        "type": "destination",
+        "name": "DRP_HTTPS",
+        "entryPath": "/sap/opu/odata"
+      },
+      "description": "SJM_DRP100_HTTPS"
+    },
+    {
+      "path": "/sap/bc/ui5_ui5",
+      "target": {
+        "type": "destination",
+        "name": "DRP_HTTPS",
+        "entryPath": "/sap/bc/ui5_ui5"
+      },
+      "description": "SJM_DRP100_HTTPS"
+    },
+    {
+      "path": "/resources/zychcn/zorder_maint01/Component",
+      "target": {
+        "type": "destination",
+        "name": "DRP_HTTPS",
+        "entryPath": "/sap/bc/lrep/flex/data/~Iqmfgu0SdwWFndiecTE6UOuwFTc=~/zychcn.zorder_maint01.Component?version=1.0.0",
+        "preferLocal": true
+      },
+      "description": "zychcn/zorder_maint01/Component Reuse Library"
+    }
+  ]
+}

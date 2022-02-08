@@ -1,0 +1,14 @@
+<mvc:View xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+    controllerName="zychcn.zorder_maint01.controller.App"
+    height="100%"
+    displayBlock="true">
+    <App id="app"
+        busy="{appView>/busy}"
+        busyIndicatorDelay="{appView>/delay}">
+        <f:FlexibleColumnLayout id="flexibleColumnLayout"
+            layout="{appView>/layout}"
+            backgroundDesign="Solid" />
+    </App>
+</mvc:View>

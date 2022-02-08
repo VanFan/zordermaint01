@@ -1,0 +1,24 @@
+{
+	"items": [{
+		"itemno": "100",
+		"boundno": "",
+		"typename": "",
+		"name": "",
+		"quantity": "",
+		"edit": true,
+		"expand": false
+	}],
+	"cols": [{
+		"name": "行号"
+	}, {
+		"name": "父行号"
+	}, {
+		"name": "类型"
+	}, {
+		"name": "物料"
+	}, {
+		"name": "数量"
+	}, {
+		"name": "复制"
+	}]
+}

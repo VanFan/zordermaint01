@@ -1,0 +1,65 @@
+{
+
+	"typenames": [{
+		"name": "bound"
+	}, {
+		"name": "screen"
+	}, {
+		"name": "cpu"
+	}, {
+		"name": "Game consoles"
+	}, {
+		"name": "Game controllers"
+	}],
+
+	"type": {
+		"bound": [{
+			"name": "computer"
+		}, {
+			"name": "ps4"
+		}],
+		"screen": [{
+			"name": "screen1"
+		}, {
+			"name": "screen2"
+		}, {
+			"name": "screen3"
+		}],
+		"cpu": [{
+			"name": "cpu1"
+		}, {
+			"name": "cpu2"
+		}, {
+			"name": "cpu3"
+		}],
+		"Game consoles": [{
+			"name": "Game consoles1"
+		}, {
+			"name": "Game consoles2"
+		}, {
+			"name": "Game consoles3"
+		}],
+		"Game controllers": [{
+			"name": "Game controllers1"
+		}, {
+			"name": "Game controllers2"
+		}, {
+			"name": "Game controllers3"
+		}]
+	},
+	"itemtype": {
+		"computer": [{
+			"type": "screen"
+		},{
+			"type": "cpu"
+		}],
+		"ps4": [{
+			"type": "Game consoles"
+		}, {
+			"type": "Game controllers"
+		}]
+	},
+	"item": {
+
+	}
+}

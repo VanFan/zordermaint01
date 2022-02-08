@@ -1,0 +1,26 @@
+{
+  "mockpreview": {
+    "mockUri": "/sap/opu/odata/sap/ZYCHCN_API_ORDER_001_SRV/",
+    "metadataFilePath": "localService/metadata.xml",
+    "loadJSONFiles": false,
+    "loadCustomRequests": false,
+    "mockRequestsFilePath": ""
+  },
+  "deploy": {
+    "destination": "DRP_HTTPS",
+    "name": "ZORDER_MAINT001"
+  },
+  "projectType": [
+    "sap.watt.uitools.ide.fiori",
+    "com.watt.common.builder.sapui5clientbuild"
+  ],
+  "build": {
+    "buildRequired": true,
+    "availableFoldersComboBox": [],
+    "availableFilesComboBox": [],
+    "excludedFolders": [],
+    "excludedFiles": [],
+    "targetFolder": "dist",
+    "lastBuildDateTime": "Fri, 11 Jun 2021 08:23:24 GMT"
+  }
+}

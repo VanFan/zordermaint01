@@ -1,0 +1,524 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata-data-aggregation-ext/v4.0/cs02/vocabularies/Org.OData.Aggregation.V1.xml">
+		<edmx:Include Alias="Aggregation" Namespace="Org.OData.Aggregation.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Capabilities.V1.xml">
+		<edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470974/Common.xml?api=v2">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470971/Communication.xml?api=v2">
+		<edmx:Include Alias="vCard" Namespace="com.sap.vocabularies.Communication.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Core.V1.xml">
+		<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/vocabularies/Org.OData.Measures.V1.xml">
+		<edmx:Include Alias="CQP" Namespace="Org.OData.Measures.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm">
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Header">
+				<Annotation Term="UI.Identification">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="GUID_H"/>
+						</Record>
+					</Collection>
+				</Annotation>
+				<!--head filter-->
+				<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>PROCESS_TYPE_D</PropertyPath>
+						<PropertyPath>OBJECT_ID</PropertyPath>
+						<PropertyPath>SOLDTO_ID</PropertyPath>
+						<!--<PropertyPath>YOUR_REF_SOLD</PropertyPath>-->
+						<!--<PropertyPath>CONTRACT_ID</PropertyPath>-->
+						<PropertyPath>STATUS</PropertyPath>
+						<PropertyPath>CRDATE</PropertyPath>
+					</Collection>
+				</Annotation>
+				<!--head list-->
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="PROCESS_TYPE"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="PROCESS_TYPE_DES"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="OBJECT_ID"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="SOLDTO_ID"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="GROSS_VALUE"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="STATUS_DES"/>
+							<Annotation Term="UI.Hidden"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="DELIVERED_DES"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="CREDIT_NOT_OK_DES"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="CRDATE"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<!--field searchhelp-->
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Header/PROCESS_TYPE">
+				<Annotation Term="Common.ValueListWithFixedValues"/>
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="OrderTypeSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PROCESS_TYPE"/>
+									<PropertyValue Property="ValueListProperty" String="KEY"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Header/PROCESS_TYPE_D">
+				<Annotation Term="Common.ValueListWithFixedValues" Bool="true"/>
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="OrderTypeDSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PROCESS_TYPE_D"/>
+									<PropertyValue Property="ValueListProperty" String="KEY"/>
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PROCESS_TYPE_DES"/>
+									<PropertyValue Property="ValueListProperty" String="VALUE"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Header/CODE">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="OrderReasonSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="CODE"/>
+									<PropertyValue Property="ValueListProperty" String="KEY"/>
+								</Record>
+								<Record Type="Common.ValueListParameterIn">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PROCESS_TYPE"/>
+									<PropertyValue Property="ValueListProperty" String="EXT_01"/>
+								</Record>
+								<Record Type="Common.ValueListParameterFilterOnly">
+									<PropertyValue Property="ValueListProperty" String="EXT_01"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="EXT_01"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Header/ADDRNUMBER">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ShipToAddrSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="ADDRNUMBER"/>
+									<PropertyValue Property="ValueListProperty" String="ADDRNUMBER"/>
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="STREET"/>
+									<PropertyValue Property="ValueListProperty" String="ADDRESS_SHORT"/>
+								</Record>
+								<Record Type="Common.ValueListParameterIn">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="SOLDTO_ID"/>
+									<PropertyValue Property="ValueListProperty" String="PARTNER"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="PARTNER"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Header/SOLDTO_ID">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="DealerSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="SOLDTO_ID"/>
+									<PropertyValue Property="ValueListProperty" String="PARTNER"/>
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="SOLDTO_NAME"/>
+									<PropertyValue Property="ValueListProperty" String="PARTNER_NAME"/>
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="NOTES_ZCOS"/>
+									<PropertyValue Property="ValueListProperty" String="NOTES_ZCOS"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Item/PRODUCT_ID">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="ProductSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PRODUCT_ID"/>
+									<PropertyValue Property="ValueListProperty" String="PRODUCT_ID"/>
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="SHORT_TEXT"/>
+									<PropertyValue Property="ValueListProperty" String="SHORT_TEXT"/>
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="UNIT"/>
+									<PropertyValue Property="ValueListProperty" String="UNIT"/>
+								</Record>
+								<Record Type="Common.ValueListParameterIn">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="SOLDTO_ID"/>
+									<PropertyValue Property="ValueListProperty" String="PARTNER"/>
+								</Record>
+								<Record Type="Common.ValueListParameterIn">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PROCESS_TYPE"/>
+									<PropertyValue Property="ValueListProperty" String="PROCESS_TYPE"/>
+								</Record>
+								<Record Type="Common.ValueListParameterIn">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="YOUR_REF_SOLD"/>
+									<PropertyValue Property="ValueListProperty" String="YOUR_REF_SOLD"/>
+								</Record>
+								<Record Type="Common.ValueListParameterIn">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="CONTRACT_ID"/>
+									<PropertyValue Property="ValueListProperty" String="CONTRACT_ID"/>
+								</Record>
+								<Record Type="Common.ValueListParameterDisplayOnly">
+									<PropertyValue Property="ValueListProperty" String="GROUP3_TX"/>
+								</Record>
+								<!--<Record Type="Common.ValueListParameterDisplayOnly">-->
+								<!--	<PropertyValue Property="ValueListProperty" String="CA_PH1"/>-->
+								<!--</Record>-->
+								<!--<Record Type="Common.ValueListParameterDisplayOnly">-->
+								<!--	<PropertyValue Property="ValueListProperty" String="CA_PH2"/>-->
+								<!--</Record>-->
+								<!--<Record Type="Common.ValueListParameterDisplayOnly">-->
+								<!--	<PropertyValue Property="ValueListProperty" String="CA_PH3"/>-->
+								<!--</Record>-->
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Product">
+				<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>PRODUCT_ID</PropertyPath>
+						<PropertyPath>SHORT_TEXT</PropertyPath>
+						<PropertyPath>PRC_GROUP3</PropertyPath>
+					</Collection>
+				</Annotation>
+				<Annotation Term="UI.LineItem">
+					<Collection>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="PRODUCT_ID"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="SHORT_TEXT"/>
+						</Record>
+						<Record Type="UI.DataField">
+							<PropertyValue Property="Value" Path="GROUP3_TX"/>
+						</Record>
+					</Collection>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Header/STATUS">
+				<Annotation Term="Common.ValueListWithFixedValues"/>
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="StatusSet"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterInOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="STATUS"/>
+									<PropertyValue Property="ValueListProperty" String="KEY"/>
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="STATUS_DES"/>
+									<PropertyValue Property="ValueListProperty" String="VALUE"/>
+								</Record>
+								<Record Type="Common.ValueListParameterIn">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PROCESS_TYPE"/>
+									<PropertyValue Property="ValueListProperty" String="EXT_01"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<!--id desc-->
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.ShipToAddr/ADDRNUMBER">
+				<Annotation Term="Common.Text" Path="ADDRESS_SHORT"/>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Dealer/PARTNER">
+				<Annotation Term="Common.Text" Path="PARTNER_NAME"/>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.OrderType/KEY">
+				<Annotation Term="Common.Text" Path="VALUE"/>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.OrderReason/KEY">
+				<Annotation Term="Common.Text" Path="VALUE"/>
+			</Annotations>
+
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.OrderTypeD/KEY">
+				<Annotation Term="Common.Text" Path="VALUE"/>
+			</Annotations>
+			
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Status/KEY">
+				<Annotation Term="Common.Text" Path="VALUE"/>
+			</Annotations>			
+			
+			<!--product search help filter field search help-->
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Product/PRC_GROUP3">
+				<Annotation Term="Common.ValueList">
+					<Record Type="Common.ValueListType">
+						<PropertyValue Property="CollectionPath" String="Group3Set"/>
+						<PropertyValue Property="Parameters">
+							<Collection>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PRC_GROUP3"/>
+									<PropertyValue Property="ValueListProperty" String="GROUP"/>
+								</Record>
+								<Record Type="Common.ValueListParameterOut">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="GROUP3_TX"/>
+									<PropertyValue Property="ValueListProperty" String="GROUP_NAME"/>
+								</Record>
+								<Record Type="Common.ValueListParameterIn">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PARTNER"/>
+									<PropertyValue Property="ValueListProperty" String="PARTNER"/>
+								</Record>
+								<Record Type="Common.ValueListParameterIn">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="PROCESS_TYPE"/>
+									<PropertyValue Property="ValueListProperty" String="PROCESS_TYPE"/>
+								</Record>
+								<Record Type="Common.ValueListParameterIn">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="YOUR_REF_SOLD"/>
+									<PropertyValue Property="ValueListProperty" String="YOUR_REF_SOLD"/>
+								</Record>
+								<Record Type="Common.ValueListParameterIn">
+									<PropertyValue Property="LocalDataProperty" PropertyPath="CONTRACT_ID"/>
+									<PropertyValue Property="ValueListProperty" String="CONTRACT_ID"/>
+								</Record>
+							</Collection>
+						</PropertyValue>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Product/CA_PH1">-->
+			<!--	<Annotation Term="Common.ValueList">-->
+			<!--		<Record Type="Common.ValueListType">-->
+			<!--			<PropertyValue Property="CollectionPath" String="PH1Set"/>-->
+			<!--			<PropertyValue Property="Parameters">-->
+			<!--				<Collection>-->
+			<!--					<Record Type="Common.ValueListParameterOut">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="CA_PH1"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="CATEGORY_ID"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterOut">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="PH1_TX_ZH"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="CATEGORY_NAME"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterIn">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="PARTNER"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="PARTNER"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterIn">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="PROCESS_TYPE"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="PROCESS_TYPE"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterIn">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="YOUR_REF_SOLD"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="YOUR_REF_SOLD"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterIn">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="CONTRACT_ID"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="CONTRACT_ID"/>-->
+			<!--					</Record>-->
+			<!--				</Collection>-->
+			<!--			</PropertyValue>-->
+			<!--		</Record>-->
+			<!--	</Annotation>-->
+			<!--</Annotations>-->
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Product/CA_PH2">-->
+			<!--	<Annotation Term="Common.ValueList">-->
+			<!--		<Record Type="Common.ValueListType">-->
+			<!--			<PropertyValue Property="CollectionPath" String="PH2Set"/>-->
+			<!--			<PropertyValue Property="Parameters">-->
+			<!--				<Collection>-->
+			<!--					<Record Type="Common.ValueListParameterOut">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="CA_PH2"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="CATEGORY_ID"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterOut">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="PH2_TX_ZH"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="CATEGORY_NAME"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterIn">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="PARTNER"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="PARTNER"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterIn">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="PROCESS_TYPE"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="PROCESS_TYPE"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterIn">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="YOUR_REF_SOLD"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="YOUR_REF_SOLD"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterIn">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="CONTRACT_ID"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="CONTRACT_ID"/>-->
+			<!--					</Record>-->
+			<!--				</Collection>-->
+			<!--			</PropertyValue>-->
+			<!--		</Record>-->
+			<!--	</Annotation>-->
+			<!--</Annotations>-->
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Product/CA_PH3">-->
+			<!--	<Annotation Term="Common.ValueList">-->
+			<!--		<Record Type="Common.ValueListType">-->
+			<!--			<PropertyValue Property="CollectionPath" String="PH3Set"/>-->
+			<!--			<PropertyValue Property="Parameters">-->
+			<!--				<Collection>-->
+			<!--					<Record Type="Common.ValueListParameterOut">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="CA_PH3"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="CATEGORY_ID"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterOut">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="PH3_TX_ZH"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="CATEGORY_NAME"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterIn">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="PARTNER"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="PARTNER"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterIn">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="PROCESS_TYPE"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="PROCESS_TYPE"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterIn">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="YOUR_REF_SOLD"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="YOUR_REF_SOLD"/>-->
+			<!--					</Record>-->
+			<!--					<Record Type="Common.ValueListParameterIn">-->
+			<!--						<PropertyValue Property="LocalDataProperty" PropertyPath="CONTRACT_ID"/>-->
+			<!--						<PropertyValue Property="ValueListProperty" String="CONTRACT_ID"/>-->
+			<!--					</Record>-->
+			<!--				</Collection>-->
+			<!--			</PropertyValue>-->
+			<!--		</Record>-->
+			<!--	</Annotation>-->
+			<!--</Annotations>-->
+			<!--Hidden Filter-->
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.ShipToAddr/PARTNER">
+				<Annotation Term="UI.HiddenFilter"/>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Product/PARTNER">
+				<Annotation Term="UI.HiddenFilter" Bool="true"/>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Product/PROCESS_TYPE">
+				<Annotation Term="UI.HiddenFilter" Bool="true"/>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Product/YOUR_REF_SOLD">
+				<Annotation Term="UI.HiddenFilter" Bool="true"/>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Product/CONTRACT_ID">
+				<Annotation Term="UI.HiddenFilter" Bool="true"/>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Group3/CONTRACT_ID">
+				<Annotation Term="UI.HiddenFilter"/>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Group3/PARTNER">
+				<Annotation Term="UI.HiddenFilter"/>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Group3/PROCESS_TYPE">
+				<Annotation Term="UI.HiddenFilter" Bool="true"/>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Group3/YOUR_REF_SOLD">
+				<Annotation Term="UI.HiddenFilter"/>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Status/EXT_01">
+				<Annotation Term="UI.HiddenFilter"/>
+			</Annotations>
+			<Annotations Target="ZYCHCN_API_ORDER_001_SRV.Dealer/NOTES_ZCOS">
+				<Annotation Term="UI.Hidden"/>
+			</Annotations>			
+			
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.PH1/CONTRACT_ID">-->
+			<!--	<Annotation Term="UI.HiddenFilter"/>-->
+			<!--</Annotations>-->
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.PH1/PARTNER">-->
+			<!--	<Annotation Term="UI.HiddenFilter"/>-->
+			<!--</Annotations>-->
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.PH1/PROCESS_TYPE">-->
+			<!--	<Annotation Term="UI.HiddenFilter"/>-->
+			<!--</Annotations>-->
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.PH1/YOUR_REF_SOLD">-->
+			<!--	<Annotation Term="UI.HiddenFilter"/>-->
+			<!--</Annotations>-->
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.PH2/CONTRACT_ID">-->
+			<!--	<Annotation Term="UI.HiddenFilter"/>-->
+			<!--</Annotations>-->
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.PH2/PARTNER">-->
+			<!--	<Annotation Term="UI.HiddenFilter"/>-->
+			<!--</Annotations>-->
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.PH2/PROCESS_TYPE">-->
+			<!--	<Annotation Term="UI.HiddenFilter"/>-->
+			<!--</Annotations>-->
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.PH2/YOUR_REF_SOLD">-->
+			<!--	<Annotation Term="UI.HiddenFilter"/>-->
+			<!--</Annotations>-->
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.PH3/CONTRACT_ID">-->
+			<!--	<Annotation Term="UI.HiddenFilter"/>-->
+			<!--</Annotations>-->
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.PH3/PARTNER">-->
+			<!--	<Annotation Term="UI.HiddenFilter"/>-->
+			<!--</Annotations>-->
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.PH3/PROCESS_TYPE">-->
+			<!--	<Annotation Term="UI.HiddenFilter"/>-->
+			<!--</Annotations>-->
+			<!--<Annotations Target="ZYCHCN_API_ORDER_001_SRV.PH3/YOUR_REF_SOLD">-->
+			<!--	<Annotation Term="UI.HiddenFilter"/>-->
+			<!--</Annotations>-->
+
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>
